@@ -33,19 +33,19 @@ describe('Routes test suite', () => {
             values: () => Object.values(defaultParams)
         };
 
-        test('given an inexistent route it should choose default route', () => {
+        test('given an inexistent route it should choose default route', async () => {
             const routes = new Routes();
             const params = {
                 ...defaultParams
             }
 
             params.request.method = 'inexistent';
-            routes.handler(...params.values());
+            await routes.handler(...params.values());
 
             expect(params.response.end).toHaveBeenCalledWith('hello world');
         });
 
-        test('it should set any request with CORS enabled', () => {
+        test('it should set any request with CORS enabled', async () => {
             const routes = new Routes();
 
             const params = {
@@ -54,13 +54,13 @@ describe('Routes test suite', () => {
 
             params.request.method = 'any';
 
-            routes.handler(...params.values());
+            await routes.handler(...params.values());
 
             expect(params.response.setHeader)
                 .toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
         });
 
-        test('given method OPTIONS it should choose options route', () => {
+        test('given method OPTIONS it should choose options route', async () => {
             const routes = new Routes();
 
             const params = {
@@ -69,13 +69,13 @@ describe('Routes test suite', () => {
 
             params.request.method = 'OPTIONS';
 
-            routes.handler(...params.values());
+            await routes.handler(...params.values());
 
             expect(params.response.end).toHaveBeenCalledWith('hello world');
             expect(params.response.writeHead).toHaveBeenCalledWith(204);
         });
 
-        test('given method POST it should choose options route', () => {
+        test('given method POST it should choose options route', async () => {
             const routes = new Routes();
 
             const params = {
@@ -84,12 +84,12 @@ describe('Routes test suite', () => {
 
             params.request.method = 'POST';
 
-            routes.handler(...params.values());
+            await routes.handler(...params.values());
 
             expect(params.response.end).toHaveBeenCalledWith();
         });
 
-        test('given method GET it should choose options route', () => {
+        test('given method GET it should choose options route', async () => {
             const routes = new Routes();
 
             const params = {
@@ -98,7 +98,7 @@ describe('Routes test suite', () => {
 
             params.request.method = 'GET';
 
-            routes.handler(...params.values());
+            await routes.handler(...params.values());
 
             expect(params.response.end).toHaveBeenCalledWith();
         });
