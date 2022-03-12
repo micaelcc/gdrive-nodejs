@@ -7,7 +7,7 @@ export default {
   clearMocks: true,
   restoreMocks: true,
   collectCoverage: true,
-  coverageDirectory: "coerage",
+  coverageDirectory: "coverage",
   coverageProvider: "v8",
   coverageReporters: [
       "text",
@@ -22,7 +22,7 @@ export default {
           statements: 100,
       }
   },
-  watchPartIgnorePatterns: [
+  watchPathIgnorePatterns: [
       "node_modules"
   ],
   transformIgnorePatterns: ["node_modules"],
