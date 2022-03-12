@@ -88,5 +88,19 @@ describe('Routes test suite', () => {
 
             expect(params.response.end).toHaveBeenCalledWith();
         });
+
+        test('given method GET it should choose options route', () => {
+            const routes = new Routes();
+
+            const params = {
+                ...defaultParams
+            }
+
+            params.request.method = 'GET';
+
+            routes.handler(...params.values());
+
+            expect(params.response.end).toHaveBeenCalledWith();
+        });
     })
 });
