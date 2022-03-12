@@ -74,5 +74,19 @@ describe('Routes test suite', () => {
             expect(params.response.end).toHaveBeenCalledWith('hello world');
             expect(params.response.writeHead).toHaveBeenCalledWith(204);
         });
+
+        test('given method POST it should choose options route', () => {
+            const routes = new Routes();
+
+            const params = {
+                ...defaultParams
+            }
+
+            params.request.method = 'POST';
+
+            routes.handler(...params.values());
+
+            expect(params.response.end).toHaveBeenCalledWith();
+        });
     })
 });
