@@ -59,5 +59,20 @@ describe('Routes test suite', () => {
             expect(params.response.setHeader)
                 .toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
         });
+
+        test('given method OPTIONS it should choose options route', () => {
+            const routes = new Routes();
+
+            const params = {
+                ...defaultParams
+            }
+
+            params.request.method = 'OPTIONS';
+
+            routes.handler(...params.values());
+
+            expect(params.response.end).toHaveBeenCalledWith('hello world');
+            expect(params.response.writeHead).toHaveBeenCalledWith(204);
+        });
     })
 });
