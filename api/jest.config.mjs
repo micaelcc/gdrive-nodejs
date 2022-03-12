@@ -14,7 +14,7 @@ export default {
       "lcov"
   ],
   testEnvironment: "node",
-  coverageThreshould: {
+  coverageThreshold: {
       global: {
           branches: 100,
           functions: 100,
