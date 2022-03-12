@@ -44,5 +44,20 @@ describe('Routes test suite', () => {
 
             expect(params.response.end).toHaveBeenCalledWith('hello world');
         });
+
+        test('it should set any request with CORS enabled', () => {
+            const routes = new Routes();
+
+            const params = {
+                ...defaultParams
+            }
+
+            params.request.method = 'any';
+
+            routes.handler(...params.values());
+
+            expect(params.response.setHeader)
+                .toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
+        });
     })
 });
